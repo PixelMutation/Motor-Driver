@@ -1,0 +1,3 @@
+[submodule "lib/pi-pico-pio-quadrature-encoder"]
+	path = lib/pi-pico-pio-quadrature-encoder
+	url = https://github.com/jamon/pi-pico-pio-quadrature-encoder.git
