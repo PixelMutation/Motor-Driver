@@ -1,4 +1,5 @@
 #include "encoder.h"
+#include "Arduino.h"
 
 QuadratureEncoder::QuadratureEncoder(int pinA, int pinB, int detents, bool pullup)
     :pinA(pinA),pinB(pinB),detents(detents),pullup(pullup){}
@@ -6,8 +7,12 @@ QuadratureEncoder::QuadratureEncoder(int pinA, int pinB, int detents, bool pullu
 int QuadratureEncoder::begin() {
     // set pullups
     if (pullup) {
+        pio_gpio_init(pinA);
+        pio_gpio_init(pinB)
         gpio_pull_up(pinA);
         gpio_pull_up(pinB);
+        // pinMode(pinA,INPUT_PULLUP);
+        // pinMode(pinB,INPUT_PULLUP);
     }
     // add pio program to pio block if not done already, find offset
     if (instances==0) {
@@ -54,3 +59,5 @@ uint QuadratureEncoder::get_total_angle() {
 
 // init encoder class with zero instances
 uint QuadratureEncoder::instances=0;
+uint QuadratureEncoder::pio0_offset=0;
+uint QuadratureEncoder::pio1_offset=0;
